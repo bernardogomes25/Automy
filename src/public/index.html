@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Consulta de Baterias</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Consultar Baterias Agendadas</h1>
+  <input type="email" id="email" placeholder="Digite seu email" />
+  <button onclick="buscar()">Buscar</button>
+  <div id="mensagem"></div>
+
+  <script>
+    async function buscar() {
+      const email = document.getElementById('email').value;
+      const respostaDiv = document.getElementById('mensagem');
+      respostaDiv.innerText = 'Buscando...';
+
+      try {
+        const resp = await fetch(`/mensagem?email=${encodeURIComponent(email)}`);
+        const texto = await resp.text();
+        respostaDiv.innerText = texto;
+      } catch (err) {
+        respostaDiv.innerText = 'Erro ao buscar as informações.';
+      }
+    }
+  </script>
+</body>
+</html>
